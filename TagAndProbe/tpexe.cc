@@ -8,10 +8,12 @@ if(argc<2) {printf("missing parameters\nUsage: config j nJ\n") ; return 0;}
 
 int j=0; 
 int nJ=1;
-if(argc>4){
+if(argc>3){
    sscanf(argv[2],"%d",&j);
    sscanf(argv[3],"%d",&nJ);
 }
+
+printf("j=%d  nJ=%d\n",j,nJ);
 
 TagAndProbe *A=new TagAndProbe();
 	
