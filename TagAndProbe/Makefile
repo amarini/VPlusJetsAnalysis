@@ -1,7 +1,8 @@
 ROOUNFOLDLIB=/afs/cern.ch/work/a/amarini/RooUnfold-1.1.1/
 ROOUNFOLDINC=/afs/cern.ch/work/a/amarini/RooUnfold-1.1.1/src/
 
-CPPFLAGS=`root-config --libs --cflags` -I$(ROOUNFOLDINC) -L$(ROOUNFOLDLIB) -lRooUnfold
+CPPFLAGS=`root-config --libs --cflags` 
+#-I$(ROOUNFOLDINC) -L$(ROOUNFOLDLIB) -lRooUnfold
 
 .PHONY:all
 all: TagAndProbe.a

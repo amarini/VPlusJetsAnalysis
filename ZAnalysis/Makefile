@@ -1,7 +1,8 @@
 ROOUNFOLDLIB=/home/root_v5-34-05/RooUnfold-1.1.1/
 ROOUNFOLDINC=/home/root_v5-34-05/RooUnfold-1.1.1/src/
 
-CPPFLAGS=`root-config --libs --cflags` -I$(ROOUNFOLDINC) -L$(ROOUNFOLDLIB) -lRooUnfold
+CPPFLAGS=`root-config --libs --cflags` 
+#-I$(ROOUNFOLDINC) -L$(ROOUNFOLDLIB) -lRooUnfold
 
 .PHONY:all
 all: ZAnalysis.a
