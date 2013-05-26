@@ -4,7 +4,7 @@ ROOUNFOLDINC=/afs/cern.ch/work/a/amarini/RooUnfold-1.1.1/src/
 CPPFLAGS=`root-config --libs --cflags` -I$(ROOUNFOLDINC) -L$(ROOUNFOLDLIB) -lRooUnfold
 
 ZUnfolding: ZUnfolding.cc ZAnalysis
-	g++ $(CPPFLAGS) ZUnfolding.cc ../ZAnalysis/ZAnalysis.a  -o ZUnfolding
+	g++ -o ZUnfolding ZUnfolding.cc ../ZAnalysis/ZAnalysis.a  $(CPPFLAGS) 
 
 .PHONY:ZAnalysis
 ZAnalysis:

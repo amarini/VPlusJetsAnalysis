@@ -20,6 +20,6 @@ BaseAnalysis.a:BaseAnalysis.o ReadParameters.o
 
 .PHONY: clean
 clean:
-	[ -f BaseAnalysis.o ] && rm BaseAnalysis.o
-	[ -f BaseAnalysis.a ] && rm BaseAnalysis.a
-	[ -f ReadParameters.o ] && rm ReadParameters.o
+	[ -f BaseAnalysis.o ] && rm BaseAnalysis.o || true
+	[ -f BaseAnalysis.a ] && rm BaseAnalysis.a || true
+	[ -f ReadParameters.o ] && rm ReadParameters.o || true

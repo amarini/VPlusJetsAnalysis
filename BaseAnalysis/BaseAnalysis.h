@@ -37,8 +37,10 @@ public:
 	int SetSmearType(int smeartype,string label) {SmearType=smeartype;extraLabel=label;}
 	int SetCuts();
 	int GetChId(){return -CHID2;}
+	int SetDebug(int d=0){debug=d; return 0;};
 protected:	
 	//tree - var
+	Int_t runNum;
 	double weight;
 	int nVtx;
 	int nLeptons;
@@ -58,6 +60,7 @@ protected:
         vector<float> *lepPhi      ;
         vector<float> *lepE        ;
         vector<int>   *lepChId     ;
+	vector<float> *lepPFIsoRhoCor;
         vector<float> *jetPt       ;
         vector<float> *jetEta      ;
         vector<float> *jetPhi      ;
@@ -84,11 +87,19 @@ protected:
 	vector<float> *lepEtaGEN; 		
 	vector<float> *lepPhiGEN; 		
 	vector<float> *lepEGEN; 		
-	vector<int> *lepChIdGEN; 		
+	vector<int>   *lepChIdGEN; 		
 	vector<float> *jetPtGEN; 		
 	vector<float> *jetEtaGEN; 		
 	vector<float> *jetPhiGEN; 		
 	vector<float> *jetEGEN; 		
+	
+	//TRIGGER
+	Int_t isTriggerMatchedFamily1; // mu+ mu-
+	Int_t isTriggerMatchedFamily2; // e+ e-
+	Int_t isTriggerMatchedFamily3; // mu e OS
+	Int_t isTriggerMatchedFamily4; // gamma
+	Int_t isTriggerMatchedFamily5; // one of the two leading object is mu
+	Int_t isTriggerMatchedFamily6; // one of the two leading object is e
 //protected:
 	//histograms
 	map<string,TH1F*> histos;

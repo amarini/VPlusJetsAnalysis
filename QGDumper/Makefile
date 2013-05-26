@@ -25,6 +25,6 @@ qgexe: qgexe.cc QGDumper QGDumper.a
 
 .PHONY:clean
 clean:
-	[ -f QGDumper.o ] && rm QGDumper.o
-	[ -f QGDumper.a ] && rm QGDumper.a
-	[ -f qgexe ] && rm qgexe
+	[ -f QGDumper.o ] && rm QGDumper.o || true
+	[ -f QGDumper.a ] && rm QGDumper.a || true
+	[ -f qgexe ] && rm qgexe || true

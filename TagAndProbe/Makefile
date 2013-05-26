@@ -25,9 +25,9 @@ tpexe: tpexe.cc TagAndProbe TagAndProbe.a
 
 .PHONY:clean
 clean:
-	[ -f TagAndProbe.o ] && rm TagAndProbe.o
-	[ -f TagAndProbe.a ] && rm TagAndProbe.a
-	[ -f tpexe ] && rm tpexe
+	[ -f TagAndProbe.o ] && rm TagAndProbe.o || true
+	[ -f TagAndProbe.a ] && rm TagAndProbe.a || true
+	[ -f tpexe ] && rm tpexe || true
 
 tpAnalysis: tpAnalysis.cc BaseAnalysis
 	g++ -D STANDALONE -o tpAnalysis tpAnalysis.cc ../BaseAnalysis/BaseAnalysis.a $(CPPFLAGS) -lRooFit -lRooFitCore
