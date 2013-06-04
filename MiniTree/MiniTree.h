@@ -1,11 +1,11 @@
 #include "../BaseAnalysis/BaseAnalysis.h"
 
 
-class TagAndProbe: public BaseAnalysis
+class MiniTree: public BaseAnalysis
 {
 public:
-	TagAndProbe();
-	~TagAndProbe();
+	MiniTree();
+	~MiniTree();
 
 	int CreateHistos();
 	//int SetActive(); //read list of active Branches from a configuration file
@@ -23,10 +23,12 @@ public:
 protected:
 	bool selGen;
 	map<string,TTree*> trees;
-	float llM_passed_iso;
-	float llM_failed_iso;
-	float llM_passed_trigger;
-	float llM_failed_trigger;
 	TFile *f_outFile;
+	
+	float gammaPt;
+	vector<float> *jetPt_;
+	vector<float> *jetEta_;
+	vector<float> *jetPhi_;
+	vector<float> *jetE_;
 };
 

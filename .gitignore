@@ -4,4 +4,9 @@
 *.so
 *.swp
 *~
+TagAndProbe/tpexe
+tpAnalysis
+tpexe
+MiniTree/tree.exe
+tree.exe
 

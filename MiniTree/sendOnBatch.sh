@@ -19,7 +19,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/afs/cern.ch/work/a/amarini/RooUnfold-1.
 cd ~/work/CMSSW_5_3_7/src/amarini/VPlusJetsAnalysis/
 cmsenv
 source /afs/cern.ch/sw/lcg/app/releases/ROOT/5.34.07/x86_64-slc5-gcc46-opt/root/bin/thisroot.sh
-./tpexe $config $j 10
+./tree.exe $config $j 10
 EOF
 done
 done

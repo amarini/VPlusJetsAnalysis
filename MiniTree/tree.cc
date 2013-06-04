@@ -1,4 +1,4 @@
-#include "TagAndProbe.h"
+#include "MiniTree.h"
 
 #include <stdio.h>
 int main(int argc, char**argv){
@@ -15,7 +15,7 @@ if(argc>3){
 
 printf("j=%d  nJ=%d\n",j,nJ);
 
-TagAndProbe *A=new TagAndProbe();
+MiniTree *A=new MiniTree();
 	
 	printf("SetConfig\n");
 //	A->SetDebug(1);
@@ -28,7 +28,7 @@ TagAndProbe *A=new TagAndProbe();
 	printf("OpenFiles\n");
 	A->OpenFiles(); //use the booked files: will loop on the TChain
 	printf("Create Histos\n--Outputfile\n");
-	A->outFile=Form("%s/TagAndProbe_chid%d_%d_%d.root",A->ReadMult("data/config.ini",argv[1],"OUTDIR"),A->GetChId(),j,nJ);
+	A->outFile=Form("%s/MiniTree_chid%d_%d_%d.root",A->ReadMult("data/config.ini",argv[1],"OUTDIR"),A->GetChId(),j,nJ);
 	printf("---OutputFile=%s\n",A->outFile.c_str());
 	printf("--Histos\n");
 	A->CreateHistos();

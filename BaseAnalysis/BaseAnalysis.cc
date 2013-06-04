@@ -192,19 +192,40 @@ for(unsigned long long iEntry=EntryMin;iEntry<EntryMax ;iEntry++)
         for(int iJ=0;iJ<jetVeto->size() && (*jetPt)[iJ]>=JetPtCut;iJ++)if( !( ( (*jetVeto)[iJ]&JetSel)  ) ) nJetsVeto++;
         if(debug>1)cout<<"nJetsVeto "<<nJetsVeto<<endl;
         if(debug>1)cout<<"jetSize Pt "<<jetPt->size()<<" Veto "<<jetVeto->size()<<endl;
-        int jet0=-1,jet1=-1,jet2=-1;
+        int jet0=-1,jet1=-1,jet2=-1,jet3=-1,jet4=-1,jet5=-1,jet6=-1,jet7=-1,jet8=-1,jet9=-1;
                 if(nJetsVeto>0)for(int iJ=0;iJ<jetPt->size();iJ++) if( !( ( (*jetVeto)[iJ]&JetSel)  ) ){jet0=iJ; break;}
                 if(nJetsVeto>1)for(int iJ=jet0+1;iJ<jetPt->size();iJ++) if( !( ( (*jetVeto)[iJ]&JetSel)  ) ){jet1=iJ; break;}
                 if(nJetsVeto>2)for(int iJ=jet1+1;iJ<jetPt->size();iJ++) if( !( ( (*jetVeto)[iJ]&JetSel)  ) ){jet2=iJ; break;}
+                if(nJetsVeto>3)for(int iJ=jet2+1;iJ<jetPt->size();iJ++) if( !( ( (*jetVeto)[iJ]&JetSel)  ) ){jet3=iJ; break;}
+                if(nJetsVeto>4)for(int iJ=jet3+1;iJ<jetPt->size();iJ++) if( !( ( (*jetVeto)[iJ]&JetSel)  ) ){jet4=iJ; break;}
+                if(nJetsVeto>5)for(int iJ=jet4+1;iJ<jetPt->size();iJ++) if( !( ( (*jetVeto)[iJ]&JetSel)  ) ){jet5=iJ; break;}
+                if(nJetsVeto>6)for(int iJ=jet5+1;iJ<jetPt->size();iJ++) if( !( ( (*jetVeto)[iJ]&JetSel)  ) ){jet6=iJ; break;}
+                if(nJetsVeto>7)for(int iJ=jet6+1;iJ<jetPt->size();iJ++) if( !( ( (*jetVeto)[iJ]&JetSel)  ) ){jet7=iJ; break;}
+                if(nJetsVeto>8)for(int iJ=jet7+1;iJ<jetPt->size();iJ++) if( !( ( (*jetVeto)[iJ]&JetSel)  ) ){jet8=iJ; break;}
+                if(nJetsVeto>9)for(int iJ=jet8+1;iJ<jetPt->size();iJ++) if( !( ( (*jetVeto)[iJ]&JetSel)  ) ){jet9=iJ; break;}
         if( (jet0>=0) && (*jetPt)[jet0]< JetPtCut) jet0=-1;
         if( (jet1>=0) && (*jetPt)[jet1]< JetPtCut) jet1=-1;
         if( (jet2>=0) && (*jetPt)[jet2]< JetPtCut) jet2=-1;
+        if( (jet3>=0) && (*jetPt)[jet3]< JetPtCut) jet3=-1;
+        if( (jet4>=0) && (*jetPt)[jet4]< JetPtCut) jet4=-1;
+        if( (jet5>=0) && (*jetPt)[jet5]< JetPtCut) jet5=-1;
+        if( (jet6>=0) && (*jetPt)[jet6]< JetPtCut) jet6=-1;
+        if( (jet7>=0) && (*jetPt)[jet7]< JetPtCut) jet7=-1;
+        if( (jet8>=0) && (*jetPt)[jet8]< JetPtCut) jet8=-1;
+        if( (jet9>=0) && (*jetPt)[jet9]< JetPtCut) jet9=-1;
 	
-	jet.resize(3);
+	jet.resize(10);
 	jet_BS.resize(3);
 	jet[0]=jet0;
 	jet[1]=jet1;
 	jet[2]=jet2;
+	jet[3]=jet3;
+	jet[4]=jet4;
+	jet[5]=jet5;
+	jet[6]=jet6;
+	jet[7]=jet7;
+	jet[8]=jet8;
+	jet[9]=jet9;
 
         //double weight=1;
 	weight=1;

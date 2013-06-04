@@ -1,7 +1,7 @@
-#include "TagAndProbe.h"
+#include "MiniTree.h"
 #include "math.h"
 
-int TagAndProbe::Smear(){
+int MiniTree::Smear(){
 	if(SmearType==0) return 0;
 	if(SmearType==1){ //JES UP
 			for(int i=0;i<(jetPt->size());i++)
@@ -15,7 +15,7 @@ int TagAndProbe::Smear(){
 			}
 }
 
-bool TagAndProbe::BaseSelection()
+bool MiniTree::BaseSelection()
 {
 if(lepPt->size()<2)return false; //2 leptons
 if( (*lepChId)[0]*(*lepChId)[1]!=CHID2)return false; //two muons
@@ -23,7 +23,7 @@ if( (*lepChId)[0]*(*lepChId)[1]!=CHID2)return false; //two muons
 return true;
 }
 
-bool TagAndProbe::BaseSelectionGEN()
+bool MiniTree::BaseSelectionGEN()
 {
 if(lepPtGEN==NULL)return false;
 if(lepPtGEN->size()<2)return false; //2 leptons
@@ -37,7 +37,7 @@ if( (*lepChIdGEN)[0]*(*lepChIdGEN)[1]!=CHID2GEN)return false; //two muons
 return true;
 }
 
-int TagAndProbe::FillMiss()
+int MiniTree::FillMiss()
 {
 #ifdef USE_ROOUNFOLD
 response[ ("llPt"+extraLabel).c_str()]->Miss(llPtGEN,weight);
@@ -45,7 +45,7 @@ response[ ("llPt"+extraLabel).c_str()]->Miss(llPtGEN,weight);
 return 0;
 }
 
-int TagAndProbe::FillHistosGEN()
+int MiniTree::FillHistosGEN()
 {
 	//Gen Selection
 	selGen=BaseSelectionGEN() && ( fabs(llMGEN-91)<llMCut) && (fabs( llYGEN) < ZYCut) ;
@@ -57,7 +57,7 @@ int TagAndProbe::FillHistosGEN()
 	
 return 0;	
 }
-int TagAndProbe::FillHistos()
+int MiniTree::FillHistos()
 {
 //FILL MISS AT EACH SELECTION FAILED
 //before llM cut 
@@ -65,53 +65,32 @@ int TagAndProbe::FillHistos()
 if(debug>1)printf("Filling Histo\n");
 histos[ ("nVtx" + extraLabel).c_str() ]->Fill(nVtx,weight);
 histos[ ("llM" + extraLabel).c_str() ]->Fill(llM,weight);
+	
+	//clear
+	jetPt_->clear();
+	jetEta_->clear();
+	jetPhi_->clear();
+	jetE_->clear();
+	
+	//fill
+	for(int i=0;i<jet.size() && jet[i]>=0; i++)
+		{
+		jetPt_->push_back ((*jetPt)[jet[i]]);	
+		jetEta_->push_back((*jetEta)[jet[i]]);	
+		jetPhi_->push_back((*jetPhi)[jet[i]]);	
+		jetE_->push_back  ((*jetE)[jet[i]]);	
+		}
+	if(photonPt->size()>30)
+		gammaPt=(*photonPt)[0];
+	else 
+		gammaPt=-1;
+	
+	trees["minitree" + extraLabel ]->Fill();
 
-
-float IsoCut=0.30;
-
-bool IsoPass=true;
-if( (*lepPFIsoRhoCor) [0] /*/(*lepPt)[0] */> IsoCut) IsoPass=false;
-if( (*lepPFIsoRhoCor) [1] /*/(*lepPt)[1] */> IsoCut) IsoPass=false;
-
-
-if(isTriggerMatchedFamily1 || isTriggerMatchedFamily2){ //if is triggered by someone
-if(IsoPass){
-	llM_passed_iso=llM;
-	trees["passed_iso" + extraLabel ]->Fill();
-	}
-else {
-	llM_failed_iso=llM;
-	trees["failed_iso" + extraLabel ]->Fill();
-	}
-}
-
-//I don't want isolated leptons - isolation is done later
-bool TriggerPass=true;
-//TODO TRIGGERPASS
-if( isTriggerMatchedFamily5 || isTriggerMatchedFamily6 )
-{//single mu trigger
-TriggerPass=isTriggerMatchedFamily1 || isTriggerMatchedFamily2;
-if(TriggerPass){
-	llM_passed_trigger=llM;
-	trees["passed_trigger" + extraLabel ]->Fill();
-	}
-else {
-	llM_failed_trigger=llM;
-	trees["failed_trigger" + extraLabel ]->Fill();
-	}
-}
-
-if(!(fabs(llM-91)<llMCut))
-	{
-	if(selGen)FillMiss();
-	return 0;
-	} //---------------------------------------------
-//after llM cut
-if(debug>1)printf("Done Filling Histo\n");
 }
 
 
-int TagAndProbe::CreateHistos()
+int MiniTree::CreateHistos()
 {
 
 if(debug>0)printf("Creating %s -- %d \n",("nVtx"+extraLabel).c_str(),SmearType);
@@ -124,39 +103,32 @@ histos[("nVtx"+extraLabel).c_str()] 		= new TH1F(("nVtx"+extraLabel).c_str(),"nV
 if(debug>1) printf("Creating llM\n");
 histos[("llM"+extraLabel).c_str()] 		= new TH1F(("llM"+extraLabel).c_str(),"llM;M^{ll};events",100,0,200);
 
-if(debug>1) printf("Creating Trees passed_iso\n");
-trees[("passed_iso"+extraLabel)] 		=new TTree(("passed_iso"+extraLabel).c_str(),"Passed");
-if(debug>1) printf("Creating Trees failed_iso\n");
-trees[("failed_iso"+extraLabel)] 		=new TTree(("failed_iso"+extraLabel).c_str(),"Failed");
 
-trees[("passed_iso"+extraLabel)]->Branch("llM",&llM_passed_iso,"llM/F");
-trees[("failed_iso"+extraLabel)]->Branch("llM",&llM_failed_iso,"llM/F");
-trees[("passed_iso"+extraLabel)]->Branch("llPt",&llPt,"llPt/F"); //sufficient to book to add new variables
-trees[("failed_iso"+extraLabel)]->Branch("llPt",&llPt,"llPt/F");
-trees[("passed_iso"+extraLabel)]->Branch("runNum",&runNum,"runNum/F"); //sufficient to book to add new variables
-trees[("failed_iso"+extraLabel)]->Branch("runNum",&runNum,"runNum/F");
-trees[("passed_iso"+extraLabel)]->Branch("lepPt0",&lepPt[0],"lepPt0/F"); //sufficient to book to add new variables
-trees[("failed_iso"+extraLabel)]->Branch("lepPt0",&lepPt[0],"lepPt0/F");
+if(debug>1) printf("Creating Trees\n");
+trees[("minitree"+extraLabel)] 		=new TTree(("minitree"+extraLabel).c_str(),"MiniTree");
 
-trees[("passed_trigger"+extraLabel)] 		=new TTree(("passed_trigger"+extraLabel).c_str(),"Passed");
-trees[("failed_trigger"+extraLabel)] 		=new TTree(("failed_trigger"+extraLabel).c_str(),"Failed");
-trees[("passed_trigger"+extraLabel)]->Branch("llM",&llM_passed_trigger,"llM/F");
-trees[("failed_trigger"+extraLabel)]->Branch("llM",&llM_failed_trigger,"llM/F");
-trees[("passed_trigger"+extraLabel)]->Branch("llPt",&llPt,"llPt/F");
-trees[("failed_trigger"+extraLabel)]->Branch("llPt",&llPt,"llPt/F");
-trees[("passed_trigger"+extraLabel)]->Branch("runNum",&runNum,"runNum/F"); //sufficient to book to add new variables
-trees[("failed_trigger"+extraLabel)]->Branch("runNum",&runNum,"runNum/F");
-trees[("passed_trigger"+extraLabel)]->Branch("lepPt0",&lepPt[0],"lepPt0/F"); //sufficient to book to add new variables
-trees[("failed_trigger"+extraLabel)]->Branch("lepPt0",&lepPt[0],"lepPt0/F");
-if(debug>1) {printf("done\n"); trees["passed_iso"]->Print();}
+trees[("minitree"+extraLabel)]->Branch("llM",&llM,"llM/F");
+trees[("minitree"+extraLabel)]->Branch("llPt",&llPt,"llM/F");
+trees[("minitree"+extraLabel)]->Branch("gammaPt",&gammaPt,"gammaPt/F");
+	
+	jetPt_=new vector<float>;
+	jetEta_=new vector<float>;
+	jetPhi_=new vector<float>;
+	jetE_=new vector<float>;
+trees[("minitree"+extraLabel)]->Branch("jetPt",&jetPt_);
+trees[("minitree"+extraLabel)]->Branch("jetEta",&jetEta_);
+trees[("minitree"+extraLabel)]->Branch("jetPhi",&jetPhi_);
+trees[("minitree"+extraLabel)]->Branch("jetE",&jetE_);
+//jet
+if(debug>1) {printf("done\n"); trees["minitree"]->Print();}
 }
 
 //constructor
-TagAndProbe::TagAndProbe():BaseAnalysis(){f_outFile=NULL;outFile="TagAndProbe.root";}
+MiniTree::MiniTree():BaseAnalysis(){f_outFile=NULL;outFile="MiniTree.root";}
 //destructor
-TagAndProbe::~TagAndProbe(){}
+MiniTree::~MiniTree(){}
 
-int TagAndProbe::Write(string outputFile){ //outputFile is useless. it is kept to overwrite the virtual function from the base class
+int MiniTree::Write(string outputFile){ //outputFile is useless. it is kept to overwrite the virtual function from the base class
 	//I need the file already opend for the trees
 	if(debug>0) printf("OutputFile %ld\n",long(f_outFile));
 	if (f_outFile==NULL) {return 1;}

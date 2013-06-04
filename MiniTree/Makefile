@@ -20,8 +20,8 @@ BaseAnalysis:
 MiniTree.a: MiniTree BaseAnalysis
 	ar  rcs MiniTree.a MiniTree.o ../BaseAnalysis/BaseAnalysis.o ../BaseAnalysis/ReadParameters.o
 
-tree.exe: tree.exe.cc MiniTree MiniTree.a
-	g++  tree.exe.cc MiniTree.a $(CPPFLAGS) -o tree.exe
+tree.exe: tree.cc MiniTree MiniTree.a
+	g++  tree.cc MiniTree.a $(CPPFLAGS) -o tree.exe
 	echo "export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/afs/cern.ch/work/a/amarini/RooUnfold-1.1.1/"
 
 .PHONY:clean
