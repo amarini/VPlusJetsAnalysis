@@ -1,6 +1,7 @@
 #include "MiniTree.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 int main(int argc, char**argv){
 
 //config2 j nJ
@@ -63,6 +64,7 @@ MiniTree *A=new MiniTree();
 
 	printf("Write\n");
 	if(A->Write("") ) printf("ERROR in Writing\n");
+	system(Form("touch %s/MiniTree_type%d_chid%d_%d_%d.done",A->ReadMult("data/config.ini",argv[1],"OUTDIR"),type,A->GetChId(),j,nJ) );
 	return 0;
 
 }
