@@ -110,6 +110,7 @@ trees[("minitree"+extraLabel)] 		=new TTree(("minitree"+extraLabel).c_str(),"Min
 trees[("minitree"+extraLabel)]->Branch("llM",&llM,"llM/F");
 trees[("minitree"+extraLabel)]->Branch("llPt",&llPt,"llM/F");
 trees[("minitree"+extraLabel)]->Branch("gammaPt",&gammaPt,"gammaPt/F");
+trees[("minitree"+extraLabel)]->Branch("PUWeight",&PUWeight,"PUWeight/F");
 	
 	jetPt_=new vector<float>;
 	jetEta_=new vector<float>;
@@ -124,7 +125,7 @@ if(debug>1) {printf("done\n"); trees["minitree"]->Print();}
 }
 
 //constructor
-MiniTree::MiniTree():BaseAnalysis(){f_outFile=NULL;outFile="MiniTree.root";}
+MiniTree::MiniTree():BaseAnalysis(){f_outFile=NULL;outFile="MiniTree.root";PUWeight=1;}
 //destructor
 MiniTree::~MiniTree(){}
 

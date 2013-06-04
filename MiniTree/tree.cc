@@ -46,7 +46,7 @@ MiniTree *A=new MiniTree();
 	printf("--Histos\n");
 	A->CreateHistos();
 	printf("Loop\n");
-	A->Loop(0,j,nJ); //type=0 data 1 MC; j , nJobs
+	A->Loop(type,j,nJ); //type=0 data 1 MC; j , nJobs
 	
 //	printf("Smear JES UP\n");
 //	A->SetSmearType(1,"_JES_UP");
