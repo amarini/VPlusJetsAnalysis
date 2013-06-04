@@ -109,6 +109,7 @@ trees[("minitree"+extraLabel)] 		=new TTree(("minitree"+extraLabel).c_str(),"Min
 
 trees[("minitree"+extraLabel)]->Branch("llM",&llM,"llM/F");
 trees[("minitree"+extraLabel)]->Branch("llPt",&llPt,"llM/F");
+trees[("minitree"+extraLabel)]->Branch("runNum",&runNum,"runNum/I"); //blind analysis
 trees[("minitree"+extraLabel)]->Branch("gammaPt",&gammaPt,"gammaPt/F");
 trees[("minitree"+extraLabel)]->Branch("PUWeight",&PUWeight,"PUWeight/F");
 	

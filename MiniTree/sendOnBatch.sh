@@ -1,5 +1,6 @@
 #!/bin/bash
 
+QUEUE=8nh
 echo "V00-09"
 read
 
@@ -14,7 +15,7 @@ for j in {0..9} ; do
 [ "$config" == "data/config_TT.ini" ] && CHID=2;
 
 	
-bsub -q 1nh -o output/log.txt <<EOF
+bsub -q $QUEUE -o output/log.txt <<EOF
 export "SCRAM_ARCH=slc5_amd64_gcc462"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/afs/cern.ch/work/a/amarini/RooUnfold-1.1.1/
 cd ~/work/CMSSW_5_3_7/src/amarini/VPlusJetsAnalysis/
