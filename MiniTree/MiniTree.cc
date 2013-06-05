@@ -108,7 +108,9 @@ if(debug>1) printf("Creating Trees\n");
 trees[("minitree"+extraLabel)] 		=new TTree(("minitree"+extraLabel).c_str(),"MiniTree");
 
 trees[("minitree"+extraLabel)]->Branch("llM",&llM,"llM/F");
-trees[("minitree"+extraLabel)]->Branch("llPt",&llPt,"llM/F");
+trees[("minitree"+extraLabel)]->Branch("llPt",&llPt,"llPt/F");
+trees[("minitree"+extraLabel)]->Branch("llEta",&llEta,"llEta/F");
+trees[("minitree"+extraLabel)]->Branch("llPhi",&llPhi,"llPhi/F");
 trees[("minitree"+extraLabel)]->Branch("runNum",&runNum,"runNum/I"); //blind analysis
 trees[("minitree"+extraLabel)]->Branch("gammaPt",&gammaPt,"gammaPt/F");
 trees[("minitree"+extraLabel)]->Branch("PUWeight",&PUWeight,"PUWeight/F");
@@ -117,10 +119,10 @@ trees[("minitree"+extraLabel)]->Branch("PUWeight",&PUWeight,"PUWeight/F");
 	jetEta_=new vector<float>;
 	jetPhi_=new vector<float>;
 	jetE_=new vector<float>;
-trees[("minitree"+extraLabel)]->Branch("jetPt",&jetPt_);
-trees[("minitree"+extraLabel)]->Branch("jetEta",&jetEta_);
-trees[("minitree"+extraLabel)]->Branch("jetPhi",&jetPhi_);
-trees[("minitree"+extraLabel)]->Branch("jetE",&jetE_);
+trees[("minitree"+extraLabel)]->Branch("jetPt","vector<float>",&jetPt_);
+trees[("minitree"+extraLabel)]->Branch("jetEta","vector<float>",&jetEta_);
+trees[("minitree"+extraLabel)]->Branch("jetPhi","vector<float>",&jetPhi_);
+trees[("minitree"+extraLabel)]->Branch("jetE","vector<float>",&jetE_);
 //jet
 if(debug>1) {printf("done\n"); trees["minitree"]->Print();}
 }
