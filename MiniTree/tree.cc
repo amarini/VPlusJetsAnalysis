@@ -29,7 +29,7 @@ MiniTree *A=new MiniTree();
 	case 0:
 		if(A->GetChId()==4)A->BookFile("DoubleMu");  //create a switch between these
 		if(A->GetChId()==1)A->BookFile("DoubleE"); 
-		if(A->GetChId()==2)A->BookFile("EMu"); 
+		if(A->GetChId()==2)A->BookFile("MuEG"); 
 		break;
 	case 1: A->BookFile("DY"); break;
 	case 2: A->BookFile("TT"); break;
