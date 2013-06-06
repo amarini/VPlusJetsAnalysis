@@ -112,8 +112,10 @@ trees[("minitree"+extraLabel)]->Branch("llPt",&llPt,"llPt/F");
 trees[("minitree"+extraLabel)]->Branch("llEta",&llEta,"llEta/F");
 trees[("minitree"+extraLabel)]->Branch("llPhi",&llPhi,"llPhi/F");
 trees[("minitree"+extraLabel)]->Branch("runNum",&runNum,"runNum/I"); //blind analysis
+trees[("minitree"+extraLabel)]->Branch("nVtx",&nVtx,"nVtx/I"); // reweight?
 trees[("minitree"+extraLabel)]->Branch("gammaPt",&gammaPt,"gammaPt/F");
 trees[("minitree"+extraLabel)]->Branch("PUWeight",&PUWeight,"PUWeight/D");
+trees[("minitree"+extraLabel)]->Branch("eventWeight",&eventWeight,"eventWeight/D");
 	
 	jetPt_=new vector<float>;
 	jetEta_=new vector<float>;
