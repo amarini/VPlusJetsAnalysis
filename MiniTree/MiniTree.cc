@@ -113,7 +113,7 @@ trees[("minitree"+extraLabel)]->Branch("llEta",&llEta,"llEta/F");
 trees[("minitree"+extraLabel)]->Branch("llPhi",&llPhi,"llPhi/F");
 trees[("minitree"+extraLabel)]->Branch("runNum",&runNum,"runNum/I"); //blind analysis
 trees[("minitree"+extraLabel)]->Branch("gammaPt",&gammaPt,"gammaPt/F");
-trees[("minitree"+extraLabel)]->Branch("PUWeight",&PUWeight,"PUWeight/F");
+trees[("minitree"+extraLabel)]->Branch("PUWeight",&PUWeight,"PUWeight/D");
 	
 	jetPt_=new vector<float>;
 	jetEta_=new vector<float>;
