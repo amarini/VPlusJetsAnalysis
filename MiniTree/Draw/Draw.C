@@ -9,14 +9,19 @@
 using namespace std;
 
 
-int Draw()
+int Draw(int nBins=200,float xMin=0,float xMax=4*3.1416)
 {
-string blind="1";//"(runNum<2.03777e+05)";
+string blind="(runNum<2.03777e+05)";
+//float lumi=19.8;
+float lumi=12.2;
 string selectionData=" && abs(llM-91)<20 && jetPt[0]>30";
 string selectionMC="PUWeight*( 1"+selectionData+")";//"PUWeight";
-string variable="MyMath::A1(llPt,jetPt[0],jetPt[1],jetPt[2],llPhi,jetPhi[0],jetPhi[1],jetPhi[2])";//"llM";
+//string variable="MyMath::A1(llPt,jetPt[0],jetPt[1],jetPt[2],llPhi,jetPhi[0],jetPhi[1],jetPhi[2])";//"llM";
+//string variable="MyMath::AP1(llPt,jetPt[0],jetPt[1],jetPt[2],llPhi,jetPhi[0],jetPhi[1],jetPhi[2])";//"llM";
+//string title="A_{1}";
+string variable="MyMath::A2(llPt,jetPt[0],jetPt[1],jetPt[2],jetPt[3],llPhi,jetPhi[0],jetPhi[1],jetPhi[2],jetPhi[3])";//
+string title="A_{2};A_{2};events";
 //float lumi=40;
-float lumi=19.8;
 //float lumi=0.3;
 
 gSystem->Load("MyMath_C.so");
@@ -47,7 +52,7 @@ TChain *ZZ=new TChain("minitree");      ZZ     ->Add("MiniTree/MiniTree_type6_ch
 TCanvas *c=new TCanvas("c","c",800,600);
 c->SetLogy();
 
-Int_t nBins=200;Float_t xMin=0; Float_t xMax=4*3.1416; string title="A_{1}";
+//Int_t nBins=200;Float_t xMin=0; Float_t xMax=4*3.1416; 
 TH1F* h_LL=new TH1F("LL",title.c_str(),nBins,xMin,xMax);
 	DoubleL->Draw((variable+">>LL").c_str(),(blind+selectionData).c_str(),"goff");
 TH1F* h_OF=new TH1F("OF",title.c_str(),nBins,xMin,xMax);
@@ -81,7 +86,7 @@ h_WW->SetFillColor(kGreen+2);  h_WW->SetLineWidth(2);h_WW->SetLineColor(kBlack);
 h_WZ->SetFillColor(kGreen+2);  h_WZ->SetLineWidth(2);h_WZ->SetLineColor(kBlack);
 h_ZZ->SetFillColor(kGreen+2);  h_ZZ->SetLineWidth(2);h_ZZ->SetLineColor(kBlack);
 
-THStack *S_mc=new THStack("MC","MC");
+THStack *S_mc=new THStack("MC",title.c_str());
 	S_mc->Add(h_TT);
 	S_mc->Add(h_ZZ);
 	S_mc->Add(h_WZ);
