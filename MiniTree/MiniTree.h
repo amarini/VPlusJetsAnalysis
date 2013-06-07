@@ -30,5 +30,6 @@ protected:
 	vector<float> *jetEta_;
 	vector<float> *jetPhi_;
 	vector<float> *jetE_;
+	Int_t nJets_;
 };
 

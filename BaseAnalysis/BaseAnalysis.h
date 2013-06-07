@@ -55,6 +55,7 @@ protected:
         float llY;
         float llDPhi;
         float llEta;
+	float pfmet;
         vector<float> *lepPt       ;
         vector<float> *lepEta      ;
         vector<float> *lepPhi      ;

@@ -17,6 +17,7 @@ int type=0; //0 -Data
 sscanf(argv[4],"%d",&type);
 printf("j=%d  nJ=%d type=%d\n",j,nJ,type);
 
+
 MiniTree *A=new MiniTree();
 	
 	printf("SetConfig\n");

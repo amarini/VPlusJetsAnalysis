@@ -1,5 +1,6 @@
 #include "MiniTree.h"
 #include "math.h"
+#include "TROOT.h"
 
 int MiniTree::Smear(){
 	if(SmearType==0) return 0;
@@ -57,6 +58,7 @@ int MiniTree::FillHistosGEN()
 	
 return 0;	
 }
+
 int MiniTree::FillHistos()
 {
 //FILL MISS AT EACH SELECTION FAILED
@@ -80,6 +82,8 @@ histos[ ("llM" + extraLabel).c_str() ]->Fill(llM,weight);
 		jetPhi_->push_back((*jetPhi)[jet[i]]);	
 		jetE_->push_back  ((*jetE)[jet[i]]);	
 		}
+	nJets_=jetPt_->size();
+
 	if(photonPt->size()>30)
 		gammaPt=(*photonPt)[0];
 	else 
@@ -116,15 +120,21 @@ trees[("minitree"+extraLabel)]->Branch("nVtx",&nVtx,"nVtx/I"); // reweight?
 trees[("minitree"+extraLabel)]->Branch("gammaPt",&gammaPt,"gammaPt/F");
 trees[("minitree"+extraLabel)]->Branch("PUWeight",&PUWeight,"PUWeight/D");
 trees[("minitree"+extraLabel)]->Branch("eventWeight",&eventWeight,"eventWeight/D");
+trees[("minitree"+extraLabel)]->Branch("pfmet",&pfmet,"pfmet/F");
 	
 	jetPt_=new vector<float>;
 	jetEta_=new vector<float>;
 	jetPhi_=new vector<float>;
 	jetE_=new vector<float>;
-trees[("minitree"+extraLabel)]->Branch("jetPt","vector<float>",&jetPt_);
-trees[("minitree"+extraLabel)]->Branch("jetEta","vector<float>",&jetEta_);
-trees[("minitree"+extraLabel)]->Branch("jetPhi","vector<float>",&jetPhi_);
-trees[("minitree"+extraLabel)]->Branch("jetE","vector<float>",&jetE_);
+
+printf("Going to set Branches for std::vectors\n");
+gROOT->ProcessLine("#include <vector>"); //trigger the load of std::vector<float> dictionaries
+trees[("minitree"+extraLabel)]->Branch("nJets",&nJets_,"nJets/I"); //
+trees[("minitree"+extraLabel)]->Branch("jetPt" ,"std::vector<float>",&jetPt_ );
+trees[("minitree"+extraLabel)]->Branch("jetEta","std::vector<float>",&jetEta_);
+trees[("minitree"+extraLabel)]->Branch("jetPhi","std::vector<float>",&jetPhi_);
+trees[("minitree"+extraLabel)]->Branch("jetE"  ,"std::vector<float>",&jetE_  );
+printf("Done\n");
 //jet
 if(debug>1) {printf("done\n"); trees["minitree"]->Print();}
 }

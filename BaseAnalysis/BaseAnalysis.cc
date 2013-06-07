@@ -85,6 +85,7 @@ t->SetBranchAddress("runNum",&runNum);
 t->SetBranchAddress("nJets",&nJets);
 t->SetBranchAddress("rho",&rho);
 t->SetBranchAddress("rho25",&rho25);
+t->SetBranchAddress("pfmet",&pfmet);
 t->SetBranchAddress("llM",&llM);
 t->SetBranchAddress("llPt",&llPt);
 t->SetBranchAddress("llPhi",&llPhi);
