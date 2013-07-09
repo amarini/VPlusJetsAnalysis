@@ -122,6 +122,10 @@ trees[("minitree"+extraLabel)]->Branch("PUWeight",&PUWeight,"PUWeight/D");
 trees[("minitree"+extraLabel)]->Branch("eventWeight",&eventWeight,"eventWeight/D");
 trees[("minitree"+extraLabel)]->Branch("pfmet",&pfmet,"pfmet/F");
 	
+trees[("minitree"+extraLabel)]->Branch("llMGEN",&llMGEN,"llMGEN/F");
+trees[("minitree"+extraLabel)]->Branch("llPtGEN",&llPtGEN,"llPtGEN/F");
+trees[("minitree"+extraLabel)]->Branch("llYGEN",&llYGEN,"llYGEN/F");
+
 	jetPt_=new vector<float>;
 	jetEta_=new vector<float>;
 	jetPhi_=new vector<float>;
@@ -134,6 +138,12 @@ trees[("minitree"+extraLabel)]->Branch("jetPt" ,"std::vector<float>",&jetPt_ );
 trees[("minitree"+extraLabel)]->Branch("jetEta","std::vector<float>",&jetEta_);
 trees[("minitree"+extraLabel)]->Branch("jetPhi","std::vector<float>",&jetPhi_);
 trees[("minitree"+extraLabel)]->Branch("jetE"  ,"std::vector<float>",&jetE_  );
+
+trees[("minitree"+extraLabel)]->Branch("jetPtGEN" ,"std::vector<float>",&jetPtGEN );
+trees[("minitree"+extraLabel)]->Branch("jetEtaGEN","std::vector<float>",&jetEtaGEN);
+trees[("minitree"+extraLabel)]->Branch("jetPhiGEN","std::vector<float>",&jetPhiGEN);
+trees[("minitree"+extraLabel)]->Branch("jetEGEN"  ,"std::vector<float>",&jetEGEN  );
+
 printf("Done\n");
 //jet
 if(debug>1) {printf("done\n"); trees["minitree"]->Print();}
