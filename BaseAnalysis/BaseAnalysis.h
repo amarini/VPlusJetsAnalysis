@@ -49,6 +49,7 @@ protected:
         int nJetsVeto;
         float rho;
         float rho25;
+        float rhoQG;
         float llM;
         float llPt;
         float llPhi;
@@ -69,6 +70,13 @@ protected:
         vector<float> *jetUNC      ;
         vector<float> *jetQGL      ;
         vector<float> *jetQGMLP      ;
+        vector<float> *jetQG_axis2_L      ;
+        vector<float> *jetQG_ptD_L      ;
+        vector<int> *jetQG_mult_L      ;
+        vector<float> *jetQG_axis1_MLP      ;
+        vector<float> *jetQG_axis2_MLP      ;
+        vector<float> *jetQG_ptD_MLP      ;
+        vector<int> *jetQG_mult_MLP      ;
         vector<float> *jetBtag     ;
         vector<float> *jetBeta     ;
         vector<int>   *jetVeto     ;

@@ -84,6 +84,7 @@ if(debug>1) printf("Booking Branch nJets\n");
 t->SetBranchAddress("runNum",&runNum);
 t->SetBranchAddress("nJets",&nJets);
 t->SetBranchAddress("rho",&rho);
+t->SetBranchAddress("rhoQG",&rhoQG);
 t->SetBranchAddress("rho25",&rho25);
 t->SetBranchAddress("pfmet",&pfmet);
 t->SetBranchAddress("llM",&llM);
@@ -105,6 +106,15 @@ t->SetBranchAddress("jetE",&jetE);
 t->SetBranchAddress("jetUNC",&jetUNC);
 t->SetBranchAddress("jetQGL",&jetQGL);
 t->SetBranchAddress("jetQGMLP",&jetQGMLP);
+//QG vars
+t->SetBranchAddress("jetQG_axis2_L",&jetQG_axis2_L);
+t->SetBranchAddress("jetQG_ptD_L",&jetQG_ptD_L);
+t->SetBranchAddress("jetQG_mult_L",&jetQG_mult_L);
+t->SetBranchAddress("jetQG_axis1_MLP",&jetQG_axis1_MLP);
+t->SetBranchAddress("jetQG_axis2_MLP",&jetQG_axis2_MLP);
+t->SetBranchAddress("jetQG_ptD_MLP",&jetQG_ptD_MLP);
+t->SetBranchAddress("jetQG_mult_MLP",&jetQG_mult_MLP);
+//---
 t->SetBranchAddress("jetBtag",&jetBtag);
 t->SetBranchAddress("jetBeta",&jetBeta);
 t->SetBranchAddress("jetPdgId",&jetPdgId);

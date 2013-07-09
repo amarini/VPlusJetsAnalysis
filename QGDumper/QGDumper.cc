@@ -45,6 +45,7 @@ t_->Branch("llPhi",		&llPhi,		"llPhi/F");
 t_->Branch("eventWeight",	&eventWeight,	"eventWeight/F");
 t_->Branch("PUWeight",		&PUWeight,	"PUWeight/F");
 t_->Branch("rhoPF",		&rho,	"rhoPF/F");
+t_->Branch("rhoPFJets",		&rhoQG,	"rhoPFJets/F");
 //--- this must be fixed in non vector style
 PUWeight=1;eventWeight=1;
 out_pdgIdPartJet0=0;
@@ -55,6 +56,15 @@ t_->Branch("ptJet0",		&out_ptJet0,	"ptJet0/F");
 t_->Branch("etaJet0",		&out_etaJet0,	"etaJet0/F");
 t_->Branch("phiJet0",		&out_phiJet0,	"phiJet0/F");
 t_->Branch("pdgIdPartJet0",	&out_pdgIdPartJet0,"pdgIdPartJet0/I");
+
+t_->Branch("axis2_L",&out_axis2_L,"axis2_L/F");
+t_->Branch("mult_L",&out_mult_L,"mult_L/F");
+t_->Branch("ptD_L",&out_ptD_L,"ptD_L/F");
+
+t_->Branch("axis1_MLP",&out_axis1_MLP,"axis1_MLP/F");
+t_->Branch("axis2_MLP",&out_axis2_MLP,"axis2_MLP/F");
+t_->Branch("mult_MLP",&out_mult_MLP,"mult_MLP/F");
+t_->Branch("ptD_MLP",&out_ptD_MLP,"ptD_MLP/F");
 
 }
 
@@ -83,6 +93,15 @@ int QGDumper::FillHistos(){
 	out_etaJet0	=(*jetEta)[jet_BS[0]];
 	out_phiJet0	=(*jetPhi)[jet_BS[0]];
 	out_pdgIdPartJet0=(*jetPdgId)[jet_BS[0]];
+	
+	out_axis2_L=(*jetQG_axis2_L)[jet_BS[0]];
+	out_mult_L=float( (*jetQG_mult_L)[jet_BS[0]] );
+	out_ptD_L=(*jetQG_ptD_L)[jet_BS[0]];
+
+	out_axis1_MLP=(*jetQG_axis1_MLP)[jet_BS[0]];
+	out_axis2_MLP=(*jetQG_axis2_MLP)[jet_BS[0]];
+	out_mult_MLP=float( (*jetQG_mult_MLP)[jet_BS[0]] );
+	out_ptD_MLP=(*jetQG_ptD_MLP)[jet_BS[0]];
 
 	t_->Fill();
 	
